@@ -8,17 +8,17 @@ CND_BUILDDIR=build
 CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
-CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=ICP-Othello
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/ICP-Othello
+CND_ARTIFACT_DIR_Debug=.
+CND_ARTIFACT_NAME_Debug=hra2016
+CND_ARTIFACT_PATH_Debug=.//hra2016
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Debug=ICP-Othello.tar
 CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/ICP-Othello.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
-CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=ICP-Othello
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/ICP-Othello
+CND_ARTIFACT_DIR_Release=.
+CND_ARTIFACT_NAME_Release=hra2016
+CND_ARTIFACT_PATH_Release=.//hra2016
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
 CND_PACKAGE_NAME_Release=ICP-Othello.tar
 CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/ICP-Othello.tar

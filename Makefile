@@ -1,7 +1,7 @@
 #Makefile
 
 CC = g++
-CFLAGS = -std=c++98 -Wall -pedantic -ansi -W -Wextra
+CFLAGS = -std=c++11 -Wall -pedantic -ansi -W -Wextra
 LOGIN = xstejs24-xstane34
 PROJ_NAME = hra2016
 FILES = main.o
