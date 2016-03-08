@@ -1,2 +1,7 @@
 hra2016
+hra2016cli
 lib/
+src/*.o
+src/logic/*.o
+src/gui/*.o
+*.zip

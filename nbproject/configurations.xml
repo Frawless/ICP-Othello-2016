@@ -4,7 +4,10 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>src/logic/board.h</itemPath>
+      <itemPath>src/logic/field.h</itemPath>
       <itemPath>src/hra2016cli.h</itemPath>
+      <itemPath>src/logic/player.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,7 +16,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>src/logic/board.cpp</itemPath>
+      <itemPath>src/logic/field.cpp</itemPath>
       <itemPath>src/hra2016cli.cpp</itemPath>
+      <itemPath>src/logic/player.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -49,6 +55,18 @@
       </item>
       <item path="src/hra2016cli.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="src/logic/board.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/logic/board.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/logic/field.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/logic/field.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/logic/player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/logic/player.h" ex="false" tool="3" flavor2="0">
+      </item>
     </conf>
     <conf name="Release" type="4">
       <toolsSet>
@@ -80,6 +98,18 @@
       <item path="src/hra2016cli.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/hra2016cli.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/logic/board.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/logic/board.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/logic/field.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/logic/field.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/logic/player.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/logic/player.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

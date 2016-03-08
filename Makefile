@@ -4,25 +4,26 @@ CC = g++
 CFLAGS = -std=c++11 -Wall -pedantic -W -Wextra  
 LOGIN = xstejs24-xstane34
 PROJ_NAME = hra2016cli
-FILES = hra2016cli.o
-PACK = *.cpp *.h Makefile Doxyfile README.txt
-MKDIR = src/
+PACK = src/ examples/ doc/ Makefile Doxyfile README.txt
+DOCRM = doc/*
+
+SRC = $(shell find . -name *.cpp)
+DEL = $(shell find . -name *.o)
+OBJ = $(SRC:%.cpp=%.o)
+
+all: $(PROJ_NAME)
+$(PROJ_NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $(PROJ_NAME) $^ -lboost_regex
 
 %.o: %.cpp %.h
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c $< -o $@
 	
-default: $(MKDIR)$(FILES)
-	$(CC) $(CFLAGS) -o $(PROJ_NAME) $^ -lboost_regex
+clean: 
+	rm -f $(DEL) $(LOGIN).zip $(PROJ_NAME)
 	
-pack: clean
-	rm -f $(LOGIN).zip
+pack:
+	rm -f $(LOGIN).zip $(DEL) $(DOCRM)
 	zip -r $(LOGIN).zip $(PACK)
-	
+
 run:
 	./$(PROJ_NAME)
-	
-doxygen:
-	doxygen Doxyfile
-	
-clean:
-	rm -f $(MKDIR)*.o $(MKDIR)*.out $(PROJ_NAME)

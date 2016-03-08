@@ -23,7 +23,7 @@ bool hra2016cli::processInput(std::string input)
 	const char* response = input.c_str();
 	cmatch what; 
 	
-	if(this->gameState = hra2016cli::RUNNING)
+	if(this->gameState == hra2016cli::RUNNING)
 	{
 		if(regex_match(response, what, regex ("([a-z]) ([0-9]{1,2})")))	// tah na místo 
 		{ 
