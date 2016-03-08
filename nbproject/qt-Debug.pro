@@ -2,14 +2,14 @@
 # Use project properties -> Build -> Qt -> Expert -> Custom Definitions.
 TEMPLATE = app
 DESTDIR = ./
-TARGET = hra2016
+TARGET = hra2016cli
 VERSION = 1.0.0
 CONFIG -= debug_and_release app_bundle lib_bundle
 CONFIG += debug 
 PKGCONFIG +=
 QT = core gui widgets
-SOURCES += src/main.cpp
-HEADERS += src/main.h
+SOURCES += src/hra2016cli.cpp
+HEADERS += src/hra2016cli.h
 FORMS +=
 RESOURCES +=
 TRANSLATIONS +=

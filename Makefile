@@ -1,10 +1,10 @@
 #Makefile
 
 CC = g++
-CFLAGS = -std=c++11 -Wall -pedantic -ansi -W -Wextra
+CFLAGS = -std=c++11 -Wall -pedantic -W -Wextra  
 LOGIN = xstejs24-xstane34
-PROJ_NAME = hra2016
-FILES = main.o
+PROJ_NAME = hra2016cli
+FILES = hra2016cli.o
 PACK = *.cpp *.h Makefile Doxyfile README.txt
 MKDIR = src/
 
@@ -12,7 +12,7 @@ MKDIR = src/
 	$(CC) $(CFLAGS) -c -o $@ $<
 	
 default: $(MKDIR)$(FILES)
-	$(CC) $(CFLAGS) -o $(PROJ_NAME) $^
+	$(CC) $(CFLAGS) -o $(PROJ_NAME) $^ -lboost_regex
 	
 pack: clean
 	rm -f $(LOGIN).zip
