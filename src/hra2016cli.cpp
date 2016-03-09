@@ -9,10 +9,11 @@
 **************************************************************/
 
 #include "hra2016cli.h"
+#include "logic/player.h"
+#include "logic/game.h"
 
+class Game;
 
-//using namespace std;
-using namespace boost;
 
 hra2016cli::hra2016cli()
 {
@@ -20,64 +21,74 @@ hra2016cli::hra2016cli()
 	start();
 }
 
-bool hra2016cli::processInput(std::string input) 
+bool hra2016cli::processInput(string input) 
 { 
 	bool end = false;
 	const char* response = input.c_str();
-	cmatch what; 
+	boost::cmatch what; 
 	
 	if(this->gameState == hra2016cli::RUNNING)
 	{
-		if(regex_match(response, what, regex ("([a-z]) ([0-9]{1,2})")))	// tah na místo 
+		if(boost::regex_match(response, what, boost::regex ("([a-z]) ([0-9]{1,2})")))	// tah na místo 
 		{ 
-			std::cout<<"Položení kamene na souřadnice"<<std::endl;
-			std::cout<<what[1]<<"-"<<what[2]<<std::endl; 
+			cout<<"Položení kamene na souřadnice"<<endl;
+			cout<<what[1]<<"-"<<what[2]<<endl; 
 		}
-		else if(regex_match(response, what, regex ("s")))	// uložení hry
+		else if(boost::regex_match(response, what, boost::regex ("s")))	// uložení hry
 		{ 
-			std::cout<<"Uložení hry"<<std::endl; 
+			cout<<"Uložení hry"<<endl; 
 		}	
-		else if(regex_match(response, what, regex ("<")))	// krok vzad
+		else if(boost::regex_match(response, what, boost::regex ("<")))	// krok vzad
 		{ 
-			std::cout<<"Krok vzad"<<std::endl; 
+			cout<<"Krok vzad"<<endl; 
 		}
-		else if(regex_match(response, what, regex (">")))	// krok vpřed
+		else if(boost::regex_match(response, what, boost::regex (">")))	// krok vpřed
 		{ 
-			std::cout<<"Krok vpřed"<<std::endl; 
+			cout<<"Krok vpřed"<<endl; 
 		}	
-		else if(regex_match(response, what, regex ("q")))	// konec hry
+		else if(boost::regex_match(response, what, boost::regex ("q")))	// konec hry
 		{ 
-			std::cout<<"Konec hry"<<std::endl; 
+			cout<<"Konec hry"<<endl; 
 			this->gameState = hra2016cli::NONE;
 		}	
 	}
 	
-	if(regex_match(response, what, regex ("n (p|c)")))	// nová hra
+	if(boost::regex_match(response, what, boost::regex ("n (p|c)")))	// nová hra
 	{ 
-		std::cout<<"Nová hra o velikosti pole: 8"<<std::endl; 
 		this->gameState = hra2016cli::RUNNING;
+		
+		// spuštění hry se zadanými parametry
+		Game *game = new Game(string(what[1]) == "p" ? Player::PERSON : Player::COMPUTER);
+		
+		cout<<"Nová hra o velikosti pole: "<<game->getBoard()->getBoardSize()<<", druhý hráč:"<<what[1]<<endl; // ??? pc nebo person?
+		
 	}  
-	else if(regex_match(response, what, regex ("n ([0-9]*) (p|c)")))	// nová hra
+	else if(boost::regex_match(response, what, boost::regex ("n ([0-9]*) (p|c)")))	// nová hra
 	{ 
-		std::cout<<"Nová hra o velikosti pole:"<<what[1]<<std::endl;
 		this->gameState = hra2016cli::RUNNING;
+		
+		// spuštění hry se zadanými parametry
+		
+		Game *game = new Game(stoi(string(what[1])), string(what[2]) == "p" ? Player::PERSON : Player::COMPUTER);	
+		cout<<"Nová hra o velikosti pole:"<<game->getBoard()->getBoardSize()<<", druhý hráč:"<<what[2]<<endl;
+
 	}	
-	else if(regex_match(response, what, regex ("h")))	//	nápověda
+	else if(boost::regex_match(response, what, boost::regex ("h")))	//	nápověda
 	{ 
-		std::cout<<"Vypíše nápovědu"<<std::endl; 
+		cout<<"Vypíše nápovědu"<<endl; 
 	}  	 
-	else if(regex_match(response, what, regex ("l")))	// nahrání hry hry
+	else if(boost::regex_match(response, what, boost::regex ("l")))	// nahrání hry hry
 	{ 
-		std::cout<<"Nahrání hry"<<std::endl; 
+		cout<<"Nahrání hry"<<endl; 
 		this->gameState = hra2016cli::RUNNING;
 	}
-	else if(regex_match(response, what, regex ("exit")))	// konec programu
+	else if(boost::regex_match(response, what, boost::regex ("exit")))	// konec programu
 	{ 
-		std::cout<<"Konec programu"<<std::endl; 
+		cout<<"Konec programu"<<endl; 
 		end = true;
 	}	
 	else{
-		 std::cout<<"Neznámý příkaz! Pro nápovědu zadejte písmeno 'h'"<<std::endl; 	   
+		 cout<<"Neznámý příkaz! Pro nápovědu zadejte písmeno 'h'"<<endl; 	   
 	}
 	
 	return end;
@@ -85,12 +96,14 @@ bool hra2016cli::processInput(std::string input)
 
 void hra2016cli::start(){
 	bool end = false;
-	std::string input;
+	string input;
+	
+	cout<<"Spuštěna hra Othello! Ovládejte pomocí CLI. Pro nápovědu zadejte h."<<endl;
 	
 	while(!end){	
-		std::cout<<"Prompt>";
-		std::getline(std::cin,input);
-		std::cout<<"Zadáno: "<<input<<std::endl;	
+		cout<<"Prompt>";
+		getline(cin,input);
+		cout<<"Zadáno: "<<input<<endl;	
 		end = processInput(input);
 	}	
 }

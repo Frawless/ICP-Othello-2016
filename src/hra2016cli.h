@@ -3,7 +3,7 @@
 *                Hra2016 (Othello - Reversi)                 *
 *        Autoři: Jakub Stejskal <xstejs24@stud.fit.vutbr.cz> *
 *                Petr Staněk    <xstane34@stud.fit.vutbr.cz> *
-* Název souboru: hra2016cli.cpp                              *
+* Název souboru: hra2016cli.h                                *
 *         Datum: 10. 03. 2016                                *
 *         Verze: 1.0                                         *
 **************************************************************/
@@ -18,18 +18,19 @@
 #include <string>
 #include <boost/regex.hpp>
 
+using namespace std;
 
 class hra2016cli
 {
 	public:
 		hra2016cli();
-		enum Type{RUNNING,NONE};
+		enum ProgramState{RUNNING,NONE};
 		
 		
 	private:
 		void start();
 		bool processInput(std::string input);
-		Type gameState;
+		ProgramState gameState;
 };
 
 #endif
