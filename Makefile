@@ -1,29 +1,40 @@
 #Makefile
 
-CC = g++
-CFLAGS = -std=c++11 -Wall -pedantic -W -Wextra  
-LOGIN = xstejs24-xstane34
-PROJ_NAME = hra2016cli
-PACK = src/ examples/ doc/ Makefile Doxyfile README.txt
-DOCRM = doc/*
+# vstupní a výstupní názvy souborů archivu ZIP
+PACK_NAME = xstejs24-xstane34
+PACK_FILES = src/ examples/ doc/ Makefile Doxyfile README.txt
 
-SRC = $(shell find . -name *.cpp)
-DEL = $(shell find . -name *.o)
-OBJ = $(SRC:%.cpp=%.o)
+# cesta k souborům s dokumentací
+DOC_FILE = doc/*
 
-all: $(PROJ_NAME)
-$(PROJ_NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(PROJ_NAME) $^ -lboost_regex
+# nastavení překlače
+CC = g++					# překladač
+CFLAGS = -std=c++11 -Wall -pedantic -W -Wextra  # parametry překladu
+LBOOST = -lboost_regex				# povolení boost regex
+
+
+# názvy výsledných programů
+PROGRAM_NAME1 = hra2016-cli		# ovládaný TUI
+PROGRAM_NAME2 = hra2016			# ovládaný GUI
+
+# cesty k souborům programu
+SRC_FILES = $(shell find . -name *.cpp)	# zdrojové soubory
+TMP_FILES = $(shell find . -name *.o)	# vzniklé dočasné objektové soubory
+OBJ_FILES = $(SRC_FILES:%.cpp=%.o)
+
+all: $(PROGRAM_NAME1)
+$(PROGRAM_NAME1): $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $(PROGRAM_NAME1) $^ -lboost_regex
 
 %.o: %.cpp %.h
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean: 
-	rm -f $(DEL) $(LOGIN).zip $(PROJ_NAME)
+	rm -f $(TMP_FILES) $(PACK_NAME).zip $(PROGRAM_NAME1)
 	
 pack:
-	rm -f $(LOGIN).zip $(DEL) $(DOCRM)
-	zip -r $(LOGIN).zip $(PACK)
+	rm -f $(PACK_NAME).zip $(TMP_FILES) $(DOC_FILE)
+	zip -r $(PACK_NAME).zip $(PACK_FILES)
 
 run:
-	./$(PROJ_NAME)
+	./$(PROGRAM_NAME1)

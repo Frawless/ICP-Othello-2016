@@ -1,9 +1,12 @@
-/* 
- * File:   main.cpp
- * Author: frawless
- *
- * Created on 8. březen 2016, 12:51
- */
+/*************************************************************
+*       Projekt: Projekt do předmětu Seminář C++ (ICP)       * 
+*                Hra2016 (Othello - Reversi)                 *
+*        Autoři: Jakub Stejskal <xstejs24@stud.fit.vutbr.cz> *
+*                Petr Staněk    <xstane34@stud.fit.vutbr.cz> *
+* Název souboru: hra2016cli.cpp                              *
+*         Datum: 10. 03. 2016                                *
+*         Verze: 1.0                                         *
+**************************************************************/
 
 #include "hra2016cli.h"
 
