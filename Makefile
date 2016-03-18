@@ -39,6 +39,7 @@ $(PROGRAM_NAME1): $(OBJ_FILES)
 	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean: 
+	rm -r -f doc/*
 	rm -f $(TMP_FILES) $(PACK_NAME).zip $(PROGRAM_NAME1)
 	
 pack:

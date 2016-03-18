@@ -1,7 +1,10 @@
 hra2016
 hra2016cli
 lib/
+doc/*.*
+savedGames/
 src/*.o
 src/logic/*.o
 src/gui/*.o
 *.zip
+.*

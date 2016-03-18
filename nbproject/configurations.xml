@@ -4,10 +4,18 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>src/logic/board.h</itemPath>
-      <itemPath>src/logic/field.h</itemPath>
+      <logicalFolder name="f1" displayName="GUI" projectFiles="true">
+        <itemPath>src/GUI/board.h</itemPath>
+        <itemPath>src/GUI/field.h</itemPath>
+        <itemPath>src/hra2016.h</itemPath>
+        <itemPath>src/GUI/mainwindow.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="Logic" projectFiles="true">
+        <itemPath>src/logic/board.h</itemPath>
+        <itemPath>src/logic/field.h</itemPath>
+        <itemPath>src/logic/player.h</itemPath>
+      </logicalFolder>
       <itemPath>src/hra2016cli.h</itemPath>
-      <itemPath>src/logic/player.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -16,10 +24,18 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>src/logic/board.cpp</itemPath>
-      <itemPath>src/logic/field.cpp</itemPath>
+      <logicalFolder name="f1" displayName="GUI" projectFiles="true">
+        <itemPath>src/GUI/board.cpp</itemPath>
+        <itemPath>src/GUI/field.cpp</itemPath>
+        <itemPath>src/GUI/mainwindow.cpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="Logic" projectFiles="true">
+        <itemPath>src/logic/board.cpp</itemPath>
+        <itemPath>src/logic/field.cpp</itemPath>
+        <itemPath>src/logic/player.cpp</itemPath>
+      </logicalFolder>
+      <itemPath>src/hra2016.cpp</itemPath>
       <itemPath>src/hra2016cli.cpp</itemPath>
-      <itemPath>src/logic/player.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -51,6 +67,22 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
+      <item path="src/GUI/board.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GUI/board.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/GUI/field.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GUI/field.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/GUI/mainwindow.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GUI/mainwindow.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/hra2016.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/hra2016.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/hra2016cli.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/hra2016cli.h" ex="false" tool="3" flavor2="0">
@@ -95,6 +127,22 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="src/GUI/board.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GUI/board.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/GUI/field.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GUI/field.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/GUI/mainwindow.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/GUI/mainwindow.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/hra2016.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/hra2016.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="src/hra2016cli.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/hra2016cli.h" ex="false" tool="3" flavor2="0">
