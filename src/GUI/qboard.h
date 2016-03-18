@@ -1,6 +1,9 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include "../logic/board.h"
+#include "../logic/game.h"
+
 #include <QGridLayout>
 
 class QBoard

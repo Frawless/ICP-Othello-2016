@@ -1,6 +1,5 @@
 #include "qboard.h"
 #include "qfield.h"
-#include "../logic/board.h"
 
 QBoard::QBoard(QWidget *parent, Game *game)
 {
