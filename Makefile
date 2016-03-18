@@ -8,6 +8,10 @@
 #         Verze: 1.0                                         *
 #************************************************************/
 
+#root
+
+#include Makefile.logic
+#include Makefile.gui
 
 # vstupní a výstupní názvy souborů archivu ZIP
 PACK_NAME = xstejs24-xstane34
@@ -21,7 +25,6 @@ CC = g++					# překladač
 CFLAGS = -std=c++11 -Wall -pedantic -W -Wextra  # parametry překladu
 LBOOST = -lboost_regex				# povolení boost regex
 
-
 # názvy výsledných programů
 PROGRAM_NAME1 = hra2016-cli		# ovládaný TUI
 PROGRAM_NAME2 = hra2016			# ovládaný GUI
@@ -31,16 +34,14 @@ SRC_FILES = $(shell find . -name *.cpp)	# zdrojové soubory
 TMP_FILES = $(shell find . -name *.o)	# vzniklé dočasné objektové soubory
 OBJ_FILES = $(SRC_FILES:%.cpp=%.o)
 
-all: $(PROGRAM_NAME1)
-$(PROGRAM_NAME1): $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $(PROGRAM_NAME1) $^ -lboost_regex  -lboost_serialization -lboost_filesystem
-
-%.o: %.cpp %.h
-	$(CC) $(CFLAGS) -c $< -o $@
+default:
+	cd src/ && $(MAKE)
+	cd src/GUI && $(MAKE)
+	@echo -e "\033[92mPřeloženo\033[0m"
 	
 clean: 
-	rm -r -f doc/*
-	rm -f $(TMP_FILES) $(PACK_NAME).zip $(PROGRAM_NAME1)
+	rm -r -f $(DOC_FILE)
+	rm -f $(TMP_FILES) $(PACK_NAME).zip $(PROGRAM_NAME1) $(PROGRAM_NAME2)
 	
 pack:
 	rm -f $(PACK_NAME).zip $(TMP_FILES) $(DOC_FILE)
