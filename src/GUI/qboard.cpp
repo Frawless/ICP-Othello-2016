@@ -1,5 +1,6 @@
-#include "board.h"
-#include "field.h"
+#include "qboard.h"
+#include "qfield.h"
+#include "../logic/board.h"
 
 QBoard::QBoard(QWidget *parrent)
 {
@@ -15,6 +16,7 @@ QBoard::QBoard(QWidget *parrent)
             {
                 QField * field = new QField(parrent);
                 this->layout->addWidget(field->getField(),x,y);
+				
             }
         }
 }

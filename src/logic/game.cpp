@@ -283,67 +283,87 @@ Player* Game::getWinner()
 
 void Game::saveHistory()
 {	
+	cout<<"Uložení historie"<<endl;
+	if(this->firstPlayer->getAvalaibleStones() == 30)
+	{
+		
+	}
 	// uložení stavu hry
     {
 		stringstream ssGame; // stream s uloženou hrou
 		boost::archive::text_oarchive oa(ssGame);
         oa << this->firstPlayer << this->secondPlayer << this->playerAlgorithm << this->playerOnMove << this->board;
 		
-		// vložení do undo
-		this->undo.push_back(ssGame.str());
-		cout<<"Size of undo "<<this->undo.size()<<endl;
-		this->redo.clear();
+		if(this->firstPlayer->getAvalaibleStones() == 30)
+		{
+			this->initState = ssGame.str();
+		}		
+		else
+		{
+			// vložení do undo
+			this->undo.push_back(ssGame.str());
+			cout<<"Size of undo "<<this->undo.size()<<endl;
+			this->redo.clear();			
+		}
+		
     }	
 }
 
 bool Game::undoHistory()
 {
 	cout << "<undo>" << endl;
-	cout << "<undo> size: "<<this->undo.size() << endl;
-	cout << "<redo> size: "<<this->redo.size() << endl;
 	// pokud nejsou žadné kroky undo nebo je pouze uchován počáteční stav hry
 	if (this->undo.empty())
 		return false;
     		
-	// pokud nebyl ještě proveden žádný krok
-	if (this->redo.empty() && this->undo.size() > 1) 
-	{
-		// !!! tady bude nejspíš trošku roblém, bude se asi mazat něco co nemá, ráno dodělám, teď tu usínám, o půl 9 byh tu měl být
-		// přeskočení počátečního stavu hry
-		this->redo.push_back(this->undo.back());
-		this->undo.pop_back();
-	}
+//	// pokud nebyl ještě proveden žádný krok
+//	if (this->redo.empty() && this->undo.size() > 1) 
+//	{
+//		// !!! tady bude nejspíš trošku roblém, bude se asi mazat něco co nemá, ráno dodělám, teď tu usínám, o půl 9 byh tu měl být
+//		// přeskočení počátečního stavu hry
+//		this->redo.push_back(this->undo.back());
+//		this->undo.pop_back();
+//	}
 	
 	{	
 		stringstream ssGame; // stream s uloženou hrou
-		ssGame << this->undo.back(); // načtení stavu hry
+		if(this->undo.size() == 1)
+		{
+			ssGame << this->initState;
+		}
+		else
+		{
+			ssGame << this->undo.back(); // načtení stavu hry
+		}
+
 		boost::archive::text_iarchive ia(ssGame);
 		ia >> this->firstPlayer >> this->secondPlayer >> this->playerAlgorithm >> this->playerOnMove >> this->board;
-		
 		// přesunout do redo
 		this->redo.push_back(this->undo.back());
 		this->undo.pop_back();
     }
+		cout << "barva políčka 4/6: "<<this->getBoard()->getField(4,6)->getColor()<<endl;
+		cout << "barva políčka 4/6: "<<this->getBoard()->getField(5,6)->getColor()<<endl;
 	cout << "<undo2>" << endl;
+	cout << "<undo> size: "<<this->undo.size() << endl;
+	cout << "<redo> size: "<<this->redo.size() << endl;	
 	return true;
 }
 
 bool Game::redoHistory()
 {
 	cout << "<redo>" << endl;
-	cout << "<undo> size: "<<this->undo.size() << endl;
-	cout << "<redo> size: "<<this->redo.size() << endl;
 	// pokud nejsou žadné kroky redo
 	if (this->redo.empty())
 		return false;
     		
-	// pokud byly provedeny všechny kroky
-	if (this->undo.empty())
-	{
-		// přeskočení počátečního stavu programu
-		this->undo.push_back(this->redo.back());
-		this->redo.pop_back();
-	}
+//	// pokud byly provedeny všechny kroky
+//	if (this->undo.empty())
+//	{
+//		// přeskočení počátečního stavu programu
+//		this->undo.push_back(this->redo.back());
+//		this->redo.pop_back();
+//	}
 	
 	{	
 		stringstream ssGame; // stream s uloženou hrou
@@ -355,7 +375,11 @@ bool Game::redoHistory()
 		this->undo.push_back(this->redo.back());
 		this->redo.pop_back();
     }
+	cout << "barva políčka 4/6: "<<this->getBoard()->getField(4,6)->getColor()<<endl;
+	cout << "barva políčka 4/6: "<<this->getBoard()->getField(5,6)->getColor()<<endl;
 	cout << "<redo2>" << endl;
+	cout << "<undo> size: "<<this->undo.size() << endl;
+	cout << "<redo> size: "<<this->redo.size() << endl;	
 	return true;
 }
 

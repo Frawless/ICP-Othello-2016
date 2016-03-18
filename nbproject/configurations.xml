@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configurationDescriptor version="95">
+<configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="GUI" projectFiles="true">
-        <itemPath>src/GUI/board.h</itemPath>
-        <itemPath>src/GUI/field.h</itemPath>
-        <itemPath>src/GUI/mainwindow.h</itemPath>
+        <itemPath>src/GUI/qboard.h</itemPath>
+        <itemPath>src/GUI/qfield.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="Logic" projectFiles="true">
         <itemPath>src/logic/board.h</itemPath>
@@ -26,9 +25,8 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f1" displayName="GUI" projectFiles="true">
-        <itemPath>src/GUI/board.cpp</itemPath>
-        <itemPath>src/GUI/field.cpp</itemPath>
-        <itemPath>src/GUI/mainwindow.cpp</itemPath>
+        <itemPath>src/GUI/qboard.cpp</itemPath>
+        <itemPath>src/GUI/qfield.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="Logic" projectFiles="true">
         <itemPath>src/logic/board.cpp</itemPath>
@@ -71,17 +69,13 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
-      <item path="src/GUI/board.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/GUI/qboard.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/GUI/board.h" ex="false" tool="3" flavor2="0">
+      <item path="src/GUI/qboard.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/GUI/field.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/GUI/qfield.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/GUI/field.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/GUI/mainwindow.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/GUI/mainwindow.h" ex="false" tool="3" flavor2="0">
+      <item path="src/GUI/qfield.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/hra2016.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -135,17 +129,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="src/GUI/board.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/GUI/qboard.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/GUI/board.h" ex="false" tool="3" flavor2="0">
+      <item path="src/GUI/qboard.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/GUI/field.cpp" ex="false" tool="1" flavor2="0">
+      <item path="src/GUI/qfield.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="src/GUI/field.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/GUI/mainwindow.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/GUI/mainwindow.h" ex="false" tool="3" flavor2="0">
+      <item path="src/GUI/qfield.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/hra2016.cpp" ex="false" tool="1" flavor2="0">
       </item>

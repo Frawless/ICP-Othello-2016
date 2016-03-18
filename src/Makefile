@@ -17,7 +17,7 @@ LBOOST = -lboost_regex				# povolení boost regex
 
 # názvy výsledných programů
 PROGRAM_NAME1 = ../hra2016-cli		# ovládaný TUI
-PROGRAM_NAME2 = ../hra2016			# ovládaný GUI
+PROGRAM_NAME2 = ../hra2016		# ovládaný GUI
 
 # cesty k souborům programu
 SRC_FILES_CLI = logic/*.cpp logic/*.h hra2016cli.cpp hra2016cli.h
@@ -27,7 +27,7 @@ OBJ_FILES_GUI = logic/game.o logic/field.o logic/board.o logic/player.o GUI/boar
 all: $(PROGRAM_NAME1) 
 #$(PROGRAM_NAME2)
 $(PROGRAM_NAME1): $(OBJ_FILES_CLI)
-	$(CC) $(CFLAGS) -o $(PROGRAM_NAME1) $^ -lboost_regex  -lboost_serialization -lboost_filesystem
+	$(CC) $(CFLAGS) -o $(PROGRAM_NAME1) $^ -lboost_regex  -lboost_serialization -lboost_filesystem -lboost_system-mt
 	@echo -e "\033[92mVytvořen soubor \033[93mhra2016-cli\033[0m"
 #$(PROGRAM_NAME2): $(OBJ_FILES_GUI)	
 #	$(CC) $(CFLAGS) -o $(PROGRAM_NAME1) $^ -lboost_regex  -lboost_serialization -lboost_filesystem

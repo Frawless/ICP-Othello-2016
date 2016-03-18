@@ -1,4 +1,4 @@
-#include "field.h"
+#include "qfield.h"
 
 #include <QWidget>
 #include <QPixmap>

@@ -80,7 +80,7 @@ class Game
 		/**
 		 * @brief Datový typ multimapy se seznamem uložených her.
 		 */
-		typedef multimap<time_t, boost::filesystem::path, greater<time_t>> TGamesList;
+		typedef multimap<time_t, boost::filesystem::path, greater<time_t> > TGamesList;
 		
 		// metody
 		/**
@@ -247,6 +247,7 @@ class Game
 		Board *board; /**< vygenerovaná hrací plocha */
 		vector<string> undo; /**< vektor kroků hry */
 		vector<string> redo; /**< vektor vrácených kroků hry */
+		string initState;
 };
 
 #endif
