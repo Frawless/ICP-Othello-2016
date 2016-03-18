@@ -8,5 +8,24 @@
 *         Verze: 1.0                                         *
 **************************************************************/
 
+/**
+ * @file field.cpp
+ * @brief Soubor obsahující třídu reprezentující políčko hrací desky.
+ * @author Staněk Petr <xstane34@stud.fit.vutbr.cz>
+ * @author Stejskal Jakub <xstejs24@stud.fit.vutbr.cz>
+ */
+
 #include "field.h"
+
+Field::Field(int x, int y)
+{
+	// nastavení souřadnic
+	this->setCoords(x, y);
+	// nastavení počáteční barvy
+	setColor(Field::EMPTY);
+	
+	// vymazání (inicializace) zvýraznění políček získatelných možným tahem
+	this->clearHighlight();
+	
+}
 
