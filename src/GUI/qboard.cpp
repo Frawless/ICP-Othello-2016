@@ -2,9 +2,10 @@
 #include "qfield.h"
 #include "../logic/board.h"
 
-QBoard::QBoard(QWidget *parrent)
+QBoard::QBoard(QWidget *parent, Game *game)
 {
-    this->board = new QWidget(parrent);
+    this->game = game;
+	this->board = new QWidget(parrent);
     this->layout = new QGridLayout();
     this->board->setLayout(this->layout);
 

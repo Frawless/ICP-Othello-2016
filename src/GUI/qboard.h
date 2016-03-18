@@ -6,12 +6,13 @@
 class QBoard
 {
 public:
-    QBoard(QWidget *parent);
+    QBoard(QWidget *parent, Game *game);
     QWidget *getBoard() {return board;};
 
 private:
     QWidget *board;
     QGridLayout *layout;
+	Game *game;
 };
 
 #endif // BOARD_H

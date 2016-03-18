@@ -78,9 +78,9 @@ DIST          = /usr/lib64/qt4/mkspecs/common/g++-multilib.conf \
 		/usr/lib64/qt4/mkspecs/features/lex.prf \
 		/usr/lib64/qt4/mkspecs/features/include_source_dir.prf \
 		Othello.pro
-QMAKE_TARGET  = ../hra2016
+QMAKE_TARGET  = ../../hra2016
 DESTDIR       = 
-TARGET        = ../hra2016
+TARGET        = ../../hra2016
 
 first: all
 ####### Implicit rules
