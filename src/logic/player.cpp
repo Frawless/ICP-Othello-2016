@@ -21,7 +21,7 @@
 const int MAX_HEURESTIC = 20; /**< minimální heuristika algoritmu */
 const int MIN_HEURESTIC = -8; /**<  maximální heuristika algoritmu */
 
-Player::Player(Game *game, Field::FieldColor playerColor, PlayerType playerType, PlayerAlgorithm playerAlgorithm)
+Player::Player(Game *game, FieldColor playerColor, PlayerType playerType, PlayerAlgorithm playerAlgorithm)
 {
 	cout << "Hráč: "<<playerColor<<" s algoritmem:" << playerAlgorithm<<endl;
 	this->playerColor = playerColor;
@@ -37,7 +37,7 @@ Player::Player(Game *game, Field::FieldColor playerColor, PlayerType playerType,
 	
 }
 
-Player::Player(Game *game, Field::FieldColor playerColor, PlayerType playerType): Player(game, playerColor, playerType, ALG_NONE){}
+Player::Player(Game *game, FieldColor playerColor, PlayerType playerType): Player(game, playerColor, playerType, ALG_NONE){}
 
 void Player::putDisk(int x, int y)
 {
@@ -51,7 +51,7 @@ void Player::proccessMoveAIv1()
 //	cout<<"Hraje počítač"<<endl;
 	vector<Field*> boundedStones; // políčka ovlivněná tahem
 	vector<Field*> bestStonesMove;
-	Field::FieldColor pc = game->getPlayerOnMove()->getColor();
+	FieldColor pc = game->getPlayerOnMove()->getColor();
 	vector<Field*>::iterator iterSingleField;
 	
 	unsigned int sizeOfBiggestMove = 0; 
@@ -63,7 +63,7 @@ void Player::proccessMoveAIv1()
 		for (int y = 1; y <= this->game->getBoard()->getBoardSize(); y++)
 		{
 			// pokud je políčko prázdné
-			if(this->game->getBoard()->getField(x,y)->getColor() == Field::EMPTY)
+			if(this->game->getBoard()->getField(x,y)->getColor() == FieldColor::EMPTY)
 			{
 				// pokud je možné z daného políčka provést tah
 				if(this->game->existsBoundedStone(x,y))
@@ -97,7 +97,7 @@ void Player::proccessMoveAIv2()
 	vector<Field*> boundedStones;
 	
 	// získání barvy hráče na tahu
-	Field::FieldColor pc = this->game->getPlayerOnMove()->getColor();	
+	FieldColor pc = this->game->getPlayerOnMove()->getColor();	
 	
 	int maxHeurestic = MIN_HEURESTIC; 
 	int heuresticTMP = MIN_HEURESTIC;
@@ -109,7 +109,7 @@ void Player::proccessMoveAIv2()
 		for (int y = 1; y <= this->game->getBoard()->getBoardSize(); y++)
 		{
 			// pokud je políčko prázdné
-			if(this->game->getBoard()->getField(x,y)->getColor() == Field::EMPTY)
+			if(this->game->getBoard()->getField(x,y)->getColor() == FieldColor::EMPTY)
 			{
 				// pokud je možné z daného políčka provést tah
 				if(this->game->existsBoundedStone(x,y))
@@ -178,7 +178,7 @@ int Player::getMoveHeurestic(int dx, int dy)
 		if(this->game->getBoard()->isOnBoard(dx+array[i].x, dy+array[i].y))
 		{
 			// prázdné políčko
-			if(copyBoard[dx-1+array[i].x][dx-1+array[i].y] == Field::EMPTY)
+			if(copyBoard[dx-1+array[i].x][dx-1+array[i].y] == FieldColor::EMPTY)
 				heurestic += 1;
 			// políčko obsazené hráčem na tahu
 			else if(copyBoard[dx-1+array[i].x][dx-1+array[i].y] == this->game->getPlayerOnMove()->getColor())

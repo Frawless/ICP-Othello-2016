@@ -22,7 +22,7 @@ PROGRAM_NAME2 = ../hra2016		# ovládaný GUI
 # cesty k souborům programu
 SRC_FILES_CLI = logic/*.cpp logic/*.h hra2016cli.cpp hra2016cli.h
 OBJ_FILES_CLI = logic/game.o logic/field.o logic/board.o logic/player.o hra2016cli.o
-OBJ_FILES_GUI = logic/game.o logic/field.o logic/board.o logic/player.o GUI/board.o GUI/field.o GUI/mainwindow.o hra2016.o 
+OBJ_FILES_GUI = logic/game.o logic/field.o logic/board.o logic/player.o GUI/qboard.o GUI/qfield.o hra2016.o 
 	
 all: $(PROGRAM_NAME1) 
 #$(PROGRAM_NAME2)

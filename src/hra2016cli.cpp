@@ -118,9 +118,9 @@ bool hra2016cli::processCommand(string command)
 	else if (this->state == ASKING_FOR_ALGORITHM)
 	{	// spuštění hry
 		if (command == "1") // pro první algoritmus
-			this->newGame(this->tmpBoardSize, tmpPlayerType, Player::ALG1);
+			this->newGame(this->tmpBoardSize, tmpPlayerType, PlayerAlgorithm::ALG1);
 		if (command == "2") // pro druhý algoritmus
-			this->newGame(this->tmpBoardSize, tmpPlayerType, Player::ALG2);
+			this->newGame(this->tmpBoardSize, tmpPlayerType, PlayerAlgorithm::ALG2);
 		// ukončení programu
 		else if(command == "exit")
 			end = true;
@@ -228,34 +228,34 @@ bool hra2016cli::processCommand(string command)
 	else if(boost::regex_match(command.c_str(), subStr, boost::regex ("n (p|c)")))
 	{
 		this->tmpBoardSize = Game::DEFAULT_BOARD_SIZE;
-		this->tmpPlayerType = string(subStr[1]) == "p" ? Player::PERSON : Player::COMPUTER;
+		this->tmpPlayerType = string(subStr[1]) == "p" ? PlayerType::PERSON : PlayerType::COMPUTER;
 		
 		// pokud je protihráč počítač -> vyžadovat zvolení algoritmu
-		if (this->tmpPlayerType == Player::COMPUTER)
+		if (this->tmpPlayerType == PlayerType::COMPUTER)
 		{
 			cout << "\033[1;34m" << "Zvolte algoritmus: jednodušší: 1, složitější: 2" << "\033[0m" << endl;
 			this->state = ASKING_FOR_ALGORITHM;
 		}
 		// jinak rovnou spustit hru
 		else
-			this->newGame(this->tmpBoardSize, tmpPlayerType, Player::ALG_NONE);
+			this->newGame(this->tmpBoardSize, tmpPlayerType, PlayerAlgorithm::ALG_NONE);
 		
 	}
 	// spuštění nové hry (volena velikost desky)
 	else if(boost::regex_match(command.c_str(), subStr, boost::regex ("n (6|8|10|12) (p|c)")))
 	{
 		this->tmpBoardSize = stoi(string(subStr[1])); // velikost desky
-		this->tmpPlayerType = string(subStr[2]) == "p" ? Player::PERSON : Player::COMPUTER; // protihráč
+		this->tmpPlayerType = string(subStr[2]) == "p" ? PlayerType::PERSON : PlayerType::COMPUTER; // protihráč
 		
 		// pokud je protihráč počítač -> vyžadovat zvolení algoritmu
-		if (this->tmpPlayerType == Player::COMPUTER)
+		if (this->tmpPlayerType == PlayerType::COMPUTER)
 		{
 			
 			cout << "\033[1;34m" << "Zvolte algoritmus: jednodušší: 1, složitější: 2" << "\033[0m" << endl;
 			this->state = ASKING_FOR_ALGORITHM;
 		}
 		else // jinak rovnou spustit hru
-			this->newGame(this->tmpBoardSize, tmpPlayerType, Player::ALG_NONE);
+			this->newGame(this->tmpBoardSize, tmpPlayerType, PlayerAlgorithm::ALG_NONE);
 	}
 	
 	else
@@ -264,13 +264,13 @@ bool hra2016cli::processCommand(string command)
 	return end;
 }
 
-void hra2016cli::newGame(int boardSize, Player::PlayerType playerType, Player::PlayerAlgorithm playerAlgorithm)
+void hra2016cli::newGame(int boardSize, PlayerType playerType, PlayerAlgorithm playerAlgorithm)
 {
 	// výpis akcí příkazu
 	cout << "\033[1;34m";
 	cout << "Spuštěna nová hra. Velikost desky: " << boardSize;
 	cout << ", protihráč: ";
-	cout << (playerType == Player::COMPUTER ? "počítač." : "člověk.");
+	cout << (playerType == PlayerType::COMPUTER ? "počítač." : "člověk.");
 	cout << "\033[0m" << endl;	
 	
 	this->quitGame(); // ukončí případnou běžící hru
@@ -376,10 +376,10 @@ void hra2016cli::showBoard()
 				if (board->getField(x, y)->isHighlight())
 					cout << this->game->getPlayerOnMove()->formatPlayer("xx");
 				// nastavení barvy hráče BLACK
-				else if (board->getField(x, y)->getColor() == Field::BLACK)
+				else if (board->getField(x, y)->getColor() == FieldColor::BLACK)
 					cout << "\033[41m" << "  " << "\033[0m";
 				// nastavení barvy hráče WHITE
-				else  if (board->getField(x, y)->getColor() == Field::WHITE) 
+				else  if (board->getField(x, y)->getColor() == FieldColor::WHITE) 
 					cout << "\033[43m" << "  " << "\033[0m";
 				// v ostatních případech vygenerování rastru (šachovnice)
 				else
@@ -409,9 +409,9 @@ void hra2016cli::showState()
 		tmpChar << char('A'-1+this->game->getOponent()->getLastMove().x);
 		tmpChar >> tmpString;
 		
-		if(this->game->getSecondPlayer()->getPlayerType() == Player::COMPUTER)
+		if(this->game->getSecondPlayer()->getPlayerType() == PlayerType::COMPUTER)
 		{
-			if(this->game->getPlayerOnMove()->getPlayerType() == Player::COMPUTER)
+			if(this->game->getPlayerOnMove()->getPlayerType() == PlayerType::COMPUTER)
 				cout<<"Hráč "<<this->game->getOponent()->formatPlayer("  ")<<" vložil kámen na: "<<this->game->getOponent()->formatPlayer("["+tmpString+":"+to_string(this->game->getOponent()->getLastMove().y)+"]")<<endl;
 			else
 				cout<<"Počítač "<<this->game->getOponent()->formatPlayer("  ")<<" vložil kámen na: "<<this->game->getOponent()->formatPlayer("["+tmpString+":"+to_string(this->game->getOponent()->getLastMove().y)+"]")<<endl;

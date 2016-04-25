@@ -1,14 +1,9 @@
 #include "qfield.h"
 
-#include <QWidget>
-#include <QPixmap>
-#include <QPainter>
-
-
-QField::QField(QWidget *parrent)
+QField::QField(QWidget *parent)
 {  
 
-    field = new QWidget(parrent);
+//    this->field = new QWidget(parent);
     /*QPixmap pm = QPixmap(field->size());
     QPainter p(&pm);
     p.setRenderHint(QPainter::Antialiasing, true);
@@ -22,7 +17,7 @@ QField::QField(QWidget *parrent)
 
 
 
-    field->setGeometry(0,0,50,50);
-    field->setStyleSheet("background-color:red;");
-    field->show();
+//    this->field->setGeometry(0,0,50,50);
+//    this->field->setStyleSheet("background-color:red;");
+//    this->field->show();
 }

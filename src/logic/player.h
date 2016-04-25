@@ -23,10 +23,15 @@
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
 #include <iostream>
+//25.4
+#include <vector>
+
 
 #include "field.h"
+#include "types.h"
 
 class Game;
+class Field;
 
 using namespace std;
 
@@ -55,8 +60,6 @@ class Player
 	};
 	
 	public:
-		enum PlayerType{PERSON, COMPUTER}; /* výčet typů hráčů */
-		enum PlayerAlgorithm{ALG1, ALG2, ALG_NONE}; /* výčet typů hráčů */
 		Player(){};
 		/**
 		 * Konstruktor vytvářející nového hráče se zadanou barvou, typem a algoritmem.
@@ -65,7 +68,7 @@ class Player
 		 * @param playerType typ hráče (člověk nebo počítač)
 		 * @param playerAlgorithm algoritmus hráče (žádný, nebo algortimus 1 nebo 2 
 		 */
-		Player(Game *game, Field::FieldColor playerColor, PlayerType playerType, PlayerAlgorithm playerAlgorithm);
+		Player(Game *game, FieldColor playerColor, PlayerType playerType, PlayerAlgorithm playerAlgorithm);
 		
 		/**
 		 * Konstruktor vytvářející nového hráče se zadanou barvou, typem.
@@ -73,12 +76,12 @@ class Player
 		 * @param playerColor barva hráče (bílá nebo černá dle barvy jeho políčka)
 		 * @param playerType typ hráče (člověk nebo počítač)
 		 */
-		Player(Game *game, Field::FieldColor playerColor, PlayerType playerType);
+		Player(Game *game, FieldColor playerColor, PlayerType playerType);
 		/**
 		 * Vrátí barvu hráče (shodnou s barvou políčka)
 		 * @return barva hráče
 		 */		
-		Field::FieldColor getColor() {return playerColor;};
+		FieldColor getColor() {return playerColor;};
 		
 		/**
 		 * Vrátí počet zbývajících kamenů hráče.
@@ -120,7 +123,7 @@ class Player
 		 * @param text formátovaný text
 		 * @return zformátovaný řetězec
 		 */		
-		string formatPlayer(string text){ return this->playerColor == Field::BLACK ? "\033[41m"+text+"\033[0m" : "\033[43m"+text+"\033[0m";};
+		string formatPlayer(string text){ return this->playerColor == FieldColor::BLACK ? "\033[41m"+text+"\033[0m" : "\033[43m"+text+"\033[0m";};
 		
 		/**
 		 * Nastaví souřadnici posledního položení kamene.
@@ -175,7 +178,7 @@ class Player
 			ar & lastMove;
 		}
 		PlayerType playerType; /**< typ hráče */
-		Field::FieldColor playerColor; /**< barva hráče */
+		FieldColor playerColor; /**< barva hráče */
 		int avalaibleStones; /**< počet zbývajících kamenů */ 
 		int ownedStones; /**< počet získaných kamenů */
 		PlayerAlgorithm playerAlgorithm; /**< algoritmus hráče */

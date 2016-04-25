@@ -22,6 +22,9 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
+//25.4
+#include <vector>
+#include "types.h"
 
 using namespace std;
 
@@ -60,16 +63,6 @@ class Field
 		/** konstruktor vytvářející nové dílčí políčko hrací desky pro potřeby
 		  * deserializace */
 		Field() {};
-		
-		/**
-		 * @brief Výčet možných barev hráčů.
-		 */
-		enum FieldColor
-		{
-			BLACK /**< černá */, 
-			WHITE /**< bílá */, 
-			EMPTY /**< žádná barva */
-		};
 		
 		// metody
 		/**

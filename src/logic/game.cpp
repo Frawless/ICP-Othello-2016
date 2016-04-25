@@ -17,14 +17,14 @@
 
 #include "game.h"
 
-Game::Game(int boardSize, Player::PlayerType secondPlayerType, Player::PlayerAlgorithm playerAlgorithm)
+Game::Game(int boardSize, PlayerType secondPlayerType, PlayerAlgorithm playerAlgorithm)
 {
 	// vytvoření hrací desky
 	this->board = new Board(boardSize);	
 	
 	// inicializace hráčů
-	this->firstPlayer = new Player(this,  Field::BLACK, Player::PERSON);
-	this->secondPlayer = new Player(this, Field::WHITE, secondPlayerType, playerAlgorithm);
+	this->firstPlayer = new Player(this,  FieldColor::BLACK, PlayerType::PERSON);
+	this->secondPlayer = new Player(this, FieldColor::WHITE, secondPlayerType, playerAlgorithm);
 	this->playerAlgorithm = playerAlgorithm;
 	
 	// inicializace hráče na tahu (napevno první - vždy člověk)
@@ -68,13 +68,13 @@ bool Game::processMove(bool onlyHighlight)
 		}
 	}
 	// pokud je možné z daného políčka táhnout a políčko je prázdné, pak je možné provést tah
-	else if(this->existsBoundedStone(x,y) && this->board->getField(x,y)->getColor() == Field::EMPTY)
+	else if(this->existsBoundedStone(x,y) && this->board->getField(x,y)->getColor() == FieldColor::EMPTY)
 	{
 		// získání všech políček ovlivněných tahem
 		vector<Field*> boundedFields = getAllBoundedStones(x, y);
 		
 		// získání barvy hráče na tahu
-		Field::FieldColor pc = this->getPlayerOnMove()->getColor();
+		FieldColor pc = this->getPlayerOnMove()->getColor();
 
 		// pouze zvýraznit možný tah, netáhnout
 		if (onlyHighlight)
@@ -101,7 +101,7 @@ bool Game::processMove(bool onlyHighlight)
 			this->saveHistory();			
 			this->processAIMove(); // provedení tahu počítačem (je-li počítač)
 			// !!!SAVE
-			if(this->getSecondPlayer()->getPlayerType() == Player::COMPUTER)
+			if(this->getSecondPlayer()->getPlayerType() == PlayerType::COMPUTER)
 				this->saveHistory();
 		}		
 	}
@@ -131,7 +131,7 @@ vector<Field*> Game::getBoundedStones(int x, int y, int dx, int dy)
 	vector<Field *> boundedStones; // vektor políček ovlivněných tahem
 	
 	// pokud políčko není prázdné -> vrať prázdný vektor
-	if(!(this->getBoard()->getField(x,y)->getColor() == Field::EMPTY))
+	if(!(this->getBoard()->getField(x,y)->getColor() == FieldColor::EMPTY))
 		return boundedStones;
 	
 	// vložení políčka pod kuzorem do vektoru
@@ -196,10 +196,10 @@ void Game::swapPlayers()
 void Game::processAIMove()
 {
 	// pokud hráč na tahu je počítač
-	if(this->playerOnMove->getPlayerType() == Player::COMPUTER)
+	if(this->playerOnMove->getPlayerType() == PlayerType::COMPUTER)
 	{
 		// pokud je zvolen první algoritmus
-		if(this->playerAlgorithm == Player::ALG1)
+		if(this->playerAlgorithm == PlayerAlgorithm::ALG1)
 			this->firstPlayer->proccessMoveAIv1();
 		
 		// pokud je zvolen první druhý
@@ -229,7 +229,7 @@ bool Game::getMoves()
 		for (int y = 1; y <= this->getBoard()->getBoardSize(); y++)
 		{
 			// pokud je políčko prázdné
-			if(this->getBoard()->getField(x,y)->getColor() == Field::EMPTY)
+			if(this->getBoard()->getField(x,y)->getColor() == FieldColor::EMPTY)
 			{
 				// pokud je možné z políčka provést nějaký tah
 				if(this->existsBoundedStone(x,y))
@@ -347,6 +347,15 @@ bool Game::undoHistory()
 	cout << "<undo2>" << endl;
 	cout << "<undo> size: "<<this->undo.size() << endl;
 	cout << "<redo> size: "<<this->redo.size() << endl;	
+	for (int x = 1; x <= this->getBoard()->getBoardSize(); x++) 
+	{
+		// pro každý řádek
+		for (int y = 1; y <= this->getBoard()->getBoardSize(); y++)
+		{
+			cout<<this->getBoard()->getField(y,x)->getColor()<<" ";
+		}
+		cout<<endl;
+	}	
 	return true;
 }
 
@@ -380,6 +389,15 @@ bool Game::redoHistory()
 	cout << "<redo2>" << endl;
 	cout << "<undo> size: "<<this->undo.size() << endl;
 	cout << "<redo> size: "<<this->redo.size() << endl;	
+	for (int x = 1; x <= this->getBoard()->getBoardSize(); x++) 
+	{
+		// pro každý řádek
+		for (int y = 1; y <= this->getBoard()->getBoardSize(); y++)
+		{
+			cout<<this->getBoard()->getField(x,y)->getColor()<<" ";
+		}
+		cout<<endl;
+	}		
 	return true;
 }
 

@@ -52,12 +52,12 @@ void Board::initDisks()
 	int y = this->boardSize/2;
 	
 	// umístění bílích kamenů
-	this->getField(x+1, y+1)->setColor(Field::WHITE);
-	this->getField(x, y)->setColor(Field::WHITE);
+	this->getField(x+1, y+1)->setColor(FieldColor::WHITE);
+	this->getField(x, y)->setColor(FieldColor::WHITE);
 	
 	// umístění černých kamenů
-	this->getField(x+1, y)->setColor(Field::BLACK);
-	this->getField(x, y+1)->setColor(Field::BLACK);	
+	this->getField(x+1, y)->setColor(FieldColor::BLACK);
+	this->getField(x, y+1)->setColor(FieldColor::BLACK);	
 }
 
 void Board::clearHighlights()

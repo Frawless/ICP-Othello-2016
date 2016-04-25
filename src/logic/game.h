@@ -25,9 +25,13 @@
 
 #include <map>
 #include <ctime>
+//25.4
+#include <vector>
+
 
 #include "player.h"
 #include "board.h"
+#include "types.h"
 
 class Player;
 class Board;
@@ -74,7 +78,7 @@ class Game
 		* @param playerAlgorithm algoritmus hráče (žádný, nebo algortimus 1 nebo 2 
 		* v případě počítače)
 		*/
-		Game(int boardSize, Player::PlayerType secondPlayerType, Player::PlayerAlgorithm playerAlgorithm);
+		Game(int boardSize, PlayerType secondPlayerType, PlayerAlgorithm playerAlgorithm);
 		
 		// datové typy
 		/**
@@ -242,7 +246,7 @@ class Game
 		// atributy
 		Player *firstPlayer; /**< ukazatel na prvního hráče */
 		Player *secondPlayer; /**< ukazatel na druhého hráče */
-		Player::PlayerAlgorithm playerAlgorithm; /* algoritmus hráče */
+		PlayerAlgorithm playerAlgorithm; /* algoritmus hráče */
 		Player *playerOnMove; /**< ukazatel na aktuálního hráče na tahu */
 		Board *board; /**< vygenerovaná hrací plocha */
 		vector<string> undo; /**< vektor kroků hry */

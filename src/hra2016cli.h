@@ -26,6 +26,7 @@
 #include <boost/regex.hpp>
 
 #include "logic/game.h"
+#include "logic/types.h"
 
 class Game;
 class Board;
@@ -87,7 +88,7 @@ class hra2016cli
 		ProgramState state; /**< stav běhu programu */
 		Game *game; /**< ukazatel na běžící hru */
 		int tmpBoardSize; /**< pomocná proměnná s velikostí desky */
-		Player::PlayerType tmpPlayerType; /**< pomocná proměnná s typem protihráče */
+		PlayerType tmpPlayerType; /**< pomocná proměnná s typem protihráče */
 		
 		// metody
 		/**
@@ -106,7 +107,7 @@ class hra2016cli
 		* @param playerAlgorithm algoritmus hráče (žádný, nebo algortimus 1 nebo 2 
 		* v případě počítače)
 		*/
-		void newGame(int boardSize, Player::PlayerType playerType, Player::PlayerAlgorithm playerAlgorithm);
+		void newGame(int boardSize, PlayerType playerType, PlayerAlgorithm playerAlgorithm);
 		
 		/**
 		 * Posuno kurzor označující uvažované políčko zadaným směrem.

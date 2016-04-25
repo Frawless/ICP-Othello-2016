@@ -11,11 +11,11 @@
 CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB
-CFLAGS        = -m64 -pipe -O2 -g -pipe -std=c++11 -Wall -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -Wall -W -D_REENTRANT $(DEFINES)
-CXXFLAGS      = -m64 -pipe -O2 -g -pipe -std=c++11 -Wall -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -Wall -W -D_REENTRANT $(DEFINES)
+CFLAGS        = -m64 -pipe -O2 -g -pipe -std=c++11 -pedantic -Wall -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -Wall -W -D_REENTRANT $(DEFINES)
+CXXFLAGS      = -m64 -pipe -O2 -g -pipe -std=c++11 -pedantic -Wall -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -Wall -W -D_REENTRANT $(DEFINES)
 INCPATH       = -I/usr/lib64/qt4/mkspecs/linux-g++-64 -I. -I/usr/include/QtCore -I/usr/include/QtGui -I/usr/include -I.
 LINK          = g++
-LFLAGS        = -std=c++11 -Wall -W -m64 -Wl,-O1
+LFLAGS        = -std=c++11 -Wall -pedantic -W -m64 -Wl,-O1
 LIBS          = $(SUBLIBS)   -lQtGui -lQtCore -lpthread 
 AR            = ar cqs
 RANLIB        = 
@@ -44,16 +44,16 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../hra2016.cpp \
-		qboard.cpp \
 		qfield.cpp \
+		qboard.cpp \
 		../logic/game.cpp \
 		../logic/board.cpp \
 		../logic/field.cpp \
 		../logic/player.cpp
 		
 OBJECTS       = ../hra2016.o \
-		qboard.o \
 		qfield.o \
+		qboard.o \
 		../logic/game.o \
 		../logic/board.o \
 		../logic/field.o \
@@ -77,7 +77,7 @@ DIST          = /usr/lib64/qt4/mkspecs/common/g++-multilib.conf \
 		/usr/lib64/qt4/mkspecs/features/yacc.prf \
 		/usr/lib64/qt4/mkspecs/features/lex.prf \
 		/usr/lib64/qt4/mkspecs/features/include_source_dir.prf \
-		Othello.pro
+		Othello.pro 
 QMAKE_TARGET  = ../../hra2016
 DESTDIR       = 
 TARGET        = ../../hra2016
@@ -88,6 +88,7 @@ first: all
 .SUFFIXES: .o .c .cpp .cc .cxx .C
 
 .cpp.o:
+	@echo -e "\033[92mMake[Obecné pravidlo] \033[93m$@\033[0m"
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o "$@" "$<"
 
 .cc.o:
@@ -104,12 +105,13 @@ first: all
 
 ####### Build rules
 
-all: Makefile $(TARGET)
+all: Makefile ../logic/field.o ../logic/player.o ../logic/game.o ../logic/board.o qboard.o qfield.o $(TARGET)
+#all: Makefile ../logic/field.o ../logic/player.o ../logic/game.o ../logic/board.o qboard.o qfield.o $(TARGET)
 
 $(TARGET):  $(OBJECTS)  
+	@echo -e "\033[92mMake výsledného souboru \033[93mhra2016\033[0m"
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS) -lboost_regex  -lboost_serialization -lboost_filesystem -lboost_system-mt
 	@echo -e "\033[92mVytvořen soubor \033[93mhra2016\033[0m"
-
 
 	
 Makefile: Othello.pro  /usr/lib64/qt4/mkspecs/linux-g++-64/qmake.conf /usr/lib64/qt4/mkspecs/common/g++-multilib.conf \
@@ -156,7 +158,7 @@ qmake:  FORCE
 
 dist: 
 	@$(CHK_DIR_EXISTS) .tmp/Othello1.0.0 || $(MKDIR) .tmp/Othello1.0.0 
-	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/Othello1.0.0/ && $(COPY_FILE) --parents board.h field.h .tmp/Othello1.0.0/ && $(COPY_FILE) --parents main.cpp board.cpp field.cpp .tmp/Othello1.0.0/ && (cd `dirname .tmp/Othello1.0.0` && $(TAR) Othello1.0.0.tar Othello1.0.0 && $(COMPRESS) Othello1.0.0.tar) && $(MOVE) `dirname .tmp/Othello1.0.0`/Othello1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Othello1.0.0
+	$(COPY_FILE) --parents $(SOURCES) $(DIST) .tmp/Othello1.0.0/ && $(COPY_FILE) --parents ../hra2016.h qboard.h qfield.h ../logic/game.h ../logic/field.h ../logic/board.h ../logic/player.h ../logic/types.h .tmp/Othello1.0.0/ && $(COPY_FILE) --parents ../hra2016.cpp qboard.cpp qfield.cpp ../logic/game.cpp ../logic/field.cpp ../logic/board.cpp ../logic/player.cpp .tmp/Othello1.0.0/ && (cd `dirname .tmp/Othello1.0.0` && $(TAR) Othello1.0.0.tar Othello1.0.0 && $(COMPRESS) Othello1.0.0.tar) && $(MOVE) `dirname .tmp/Othello1.0.0`/Othello1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/Othello1.0.0
 
 
 clean:compiler_clean 
@@ -196,7 +198,42 @@ compiler_clean:
 
 ####### Compile
 
+../hra2016.o: ../hra2016.cpp ../hra2016.h 
+	@echo -e "\033[92mMake[$@] \033[93m$@\033[0m"
+	$(CXX) $(CXXFLAGS) $(INCPATH) -c ../hra2016.cpp -o ../hra2016.o
+#$(CXX) $(CXXFLAGS) $(INCPATH) -c ../hra2016.cpp -o ../hra2016.o qboard.o qfield.o ../logic/game.o ../logic/player.o ../logic/board.o ../logic/field.o
 
+qboard.o: qboard.cpp qboard.h \
+		qfield.h
+	@echo -e "\033[92mMake[$@] \033[93m$@\033[0m"
+	$(CXX) $(CXXFLAGS) $(INCPATH) -c qboard.cpp -o qboard.o 
+
+qfield.o: qfield.cpp qfield.h
+	@echo -e "\033[92mMake[$@] \033[93m$@\033[0m"
+	$(CXX) $(CXXFLAGS) $(INCPATH) -c qfield.cpp -o qfield.o
+
+board.o: ../logic/board.cpp ../logic/board.h \
+		../logic/field.h \
+		../logic/game.h \
+		../logic/player.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../logic/board.o ../logic/board.cpp
+
+field.o: ../logic/field.cpp ../logic/field.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../logic/field.o ../logic/field.cpp
+
+game.o: ../logic/game.cpp ../logic/game.h \
+		../logic/player.h \
+		../logic/field.h \
+		../logic/board.h \
+		../logic/types.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../logic/game.o ../logic/game.cpp
+
+player.o: ../logic/player.cpp ../logic/player.h \
+		../logic/field.h \
+		../logic/game.h \
+		../logic/board.h \
+		../logic/types.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../logic/player.o ../logic/player.cpp
 
 ####### Install
 

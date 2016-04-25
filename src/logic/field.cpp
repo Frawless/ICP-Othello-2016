@@ -22,7 +22,7 @@ Field::Field(int x, int y)
 	// nastavení souřadnic
 	this->setCoords(x, y);
 	// nastavení počáteční barvy
-	setColor(Field::EMPTY);
+	setColor(FieldColor::EMPTY);
 	
 	// vymazání (inicializace) zvýraznění políček získatelných možným tahem
 	this->clearHighlight();
