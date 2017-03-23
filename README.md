@@ -14,4 +14,4 @@ Překlad:
 
 Možné hrát hru s GUI (*hra2016-cli*) nebo pouze terminálovou verzi (*hra2016*).
 
-Hra je plně funkční. Jelikož tento předmět nebyl o umělé inteligenci tak náročnost počítače jako protivníka je velcie malá.
+Hra je plně funkční. Jelikož tento předmět nebyl o umělé inteligenci tak náročnost počítače jako protivníka je velice nízká.
